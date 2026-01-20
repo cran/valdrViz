@@ -27,9 +27,15 @@ need <- shiny::need
 #' Returns `NULL` on failure.
 #'
 #' @param path Path to a CSV file.
+#' @param max_mb Maximum file size in MB.
 #'
 #' @keywords internal
-read_fd <- function(path) {
+read_fd <- function(path, max_mb = 250) {
+    sz <- tryCatch(file.info(path)$size, error = function(e) NA_real_)
+    if (is.na(sz) || sz > max_mb * 1024^2) {
+        return(NULL)
+    }
+
     df <- tryCatch(
         readr::read_csv(path, show_col_types = FALSE),
         error = function(e) NULL
@@ -67,17 +73,16 @@ fd_standardise <- function(df) {
 #' combined data.frame. Returns `NULL` if nothing valid is found.
 #'
 #' @param folder Folder path.
-#'
+#' @param max_mb Maximum file size in MB.
 #' @keywords internal
-fd_read_folder <- function(folder) {
+fd_read_folder <- function(folder, max_mb = 250) {
     files <- list.files(folder, "\\.csv$", full.names = TRUE, recursive = TRUE)
     if (!length(files)) {
         return(NULL)
     }
 
-    lst <- lapply(files, read_fd)
+    lst <- lapply(files, read_fd, max_mb = max_mb)
     lst <- lst[!vapply(lst, is.null, logical(1))]
-
     if (!length(lst)) {
         return(NULL)
     }

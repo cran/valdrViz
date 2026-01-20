@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' if (interactive()) {
-#'   forcedecks_performance_dashboard()
+#'     forcedecks_performance_dashboard()
 #' }
 #'
 #' @export
@@ -18,6 +18,10 @@ forcedecks_performance_dashboard <- function(
     data = NULL,
     launch.browser = TRUE,
     tabs = c("metric_explorer", "radar", "longit", "quadrant", "player_report")) {
+    
+    # Allow uploads up to 250 MB
+    options(shiny.maxRequestSize = 250 * 1024^2)
+
     app <- shiny::shinyApp(
         ui = app_ui(enabled_tabs = tabs),
         server = function(input, output, session) {

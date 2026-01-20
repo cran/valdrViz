@@ -4,10 +4,12 @@
 \alias{read_fd}
 \title{Read a single ForceDecks CSV}
 \usage{
-read_fd(path)
+read_fd(path, max_mb = 250)
 }
 \arguments{
 \item{path}{Path to a CSV file.}
+
+\item{max_mb}{Maximum file size in MB.}
 }
 \description{
 Safely reads a CSV file and checks that all required columns are present.

@@ -25,7 +25,7 @@ Launches an interactive 'shiny' application for exploring your ForceDecks data.
 }
 \examples{
 if (interactive()) {
-  forcedecks_performance_dashboard()
+    forcedecks_performance_dashboard()
 }
 
 }

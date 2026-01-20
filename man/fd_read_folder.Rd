@@ -4,10 +4,12 @@
 \alias{fd_read_folder}
 \title{Read all valid ForceDecks CSVs from a folder}
 \usage{
-fd_read_folder(folder)
+fd_read_folder(folder, max_mb = 250)
 }
 \arguments{
 \item{folder}{Folder path.}
+
+\item{max_mb}{Maximum file size in MB.}
 }
 \description{
 Recursively scans a folder for \code{.csv} files, keeps only those that
