@@ -15,10 +15,6 @@ REQ <- c(
     if (!is.null(a) && length(a) > 0 && !is.na(a[1])) a else b
 }
 
-# Simple aliases so modules can call validate()/need() without namespacing
-validate <- shiny::validate
-need <- shiny::need
-
 # ForceDecks I/O helpers
 
 #' Read a single ForceDecks CSV
